@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+
 import './App.css';
+import SgPostal from "./sgPostal"
+import ForeignPostal from "./foreignPostal"
 
 function App() {
+  const [country, setCountry] = useState("Singapore")
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form>
+        <p>Country</p>
+        <select name="country" value={country} onChange={event => setCountry(event.target.value)}>
+            <option value="Singapore">Singapore </option>
+            <option value="Malaysia">Malaysia </option>
+            <option value="Australia">Australia </option>
+        </select> <br />
+
+        <div>{country === "Singapore" ? <SgPostal country={country} /> : <ForeignPostal country={country}/>}</div>
+
+      </form>
+      
     </div>
   );
 }
